@@ -1,0 +1,9 @@
+ru\itis\models\Role.class
+ru\itis\listeners\SpringContextServletContextListener.class
+ru\itis\repositories\UserRepository.class
+ru\itis\config\ApplicationContextConfig.class
+ru\itis\models\State.class
+ru\itis\models\User.class
+ru\itis\models\User$UserBuilder.class
+ru\itis\repositories\CrudRepository.class
+ru\itis\repositories\UserRepositoryJdbcTemplateImpl.class

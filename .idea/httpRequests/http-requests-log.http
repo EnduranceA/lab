@@ -1,0 +1,12 @@
+GET http://localhost:8080/test
+
+<> 2020-03-02T042504.404.html
+
+###
+
+GET http://localhost:8080/confirm/test
+
+<> 2020-03-02T041833.404.html
+
+###
+
