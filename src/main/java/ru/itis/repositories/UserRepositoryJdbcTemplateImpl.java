@@ -11,6 +11,7 @@ import ru.itis.models.Role;
 import ru.itis.models.State;
 import ru.itis.models.User;
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,17 +29,17 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
     private static final String SQL_SELECT_ALL = "SELECT * FROM client;";
 
     //language=SQL
-    private static final String SQL_INSERT = "INSERT INTO client(email, username, password, role, state, code) " +
-            "VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO client(first_name, last_name, email, hash_password, " +
+            "role, state, confirm_code, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     //language=SQL
     private static final String SQL_DELETE = "DELETE FROM client WHERE id = ?;";
 
     //language=SQL
-    private static final String SQL_SELECT_BY_CODE = "SELECT * FROM client WHERE code = ?;";
+    private static final String SQL_SELECT_BY_CODE = "SELECT * FROM client WHERE confirm_code = ?;";
 
     //language=SQL
-    private static final String SQL_UPDATE_STATE = "UPDATE client SET state = 'CONFIRMED' WHERE code = ?;";
+    private static final String SQL_UPDATE_STATE = "UPDATE client SET state = 'CONFIRMED' WHERE confirm_code = ?;";
 
     //language=SQL
     private static final String SQL_SELECT_BY_EMAIL = "SELECT * FROM client WHERE email = ?;";
@@ -46,12 +47,14 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
     private RowMapper<User> userRowMapper = (row, rowNumber) ->
             User.builder()
                     .id(row.getLong("id"))
+                    .firstName(row.getString("first_name"))
+                    .lastName(row.getString("last_name"))
                     .email(row.getString("email"))
-                    .username(row.getString("username"))
-                    .hashPassword(row.getString("password"))
+                    .hashPassword(row.getString("hash_password"))
                     .role(Role.valueOf(row.getString("role")))
                     .state(State.valueOf(row.getString("state")))
-                    .confirmCode(row.getString("code"))
+                    .createdAt(LocalDateTime.parse(row.getString("created_at")))
+                    .confirmCode(row.getString("confirm_code"))
                     .build();
 
     @Override
@@ -59,8 +62,7 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
         try {
             User user = template.queryForObject(SQL_SELECT_BY_ID, new Object[]{id}, userRowMapper);
             return Optional.ofNullable(user);
-        }
-        catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
@@ -69,8 +71,7 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
     public List<User> findAll() {
         try {
             return template.query(SQL_SELECT_ALL, userRowMapper);
-        }
-        catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }
@@ -81,15 +82,17 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
         template.update(connection -> {
             PreparedStatement statement = connection
                     .prepareStatement(SQL_INSERT);
-            statement.setString(1, user.getEmail());
-            statement.setString(2, user.getUsername());
-            statement.setString(3, user.getHashPassword());
-            statement.setString(4,  String.valueOf(user.getRole()));
-            statement.setString(5, String.valueOf(user.getState()));
-            statement.setString(6, user.getConfirmCode());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getHashPassword());
+            statement.setString(5, String.valueOf(user.getRole()));
+            statement.setString(6, String.valueOf(user.getState()));
+            statement.setString(7, user.getConfirmCode());
+            statement.setString(8, String.valueOf(user.getCreatedAt()));
             return statement;
         }, keyHolder);
-        user.setId((Long)keyHolder.getKey());
+        user.setId((Long) keyHolder.getKey());
     }
 
     @Override
@@ -99,21 +102,13 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
 
     @Override
     public void confirm(String code) {
-        Optional<User> userOptional = findByCode(code);
-        if (userOptional.isPresent()) {
-            template.update(SQL_UPDATE_STATE, code);
-        }
+        template.update(SQL_UPDATE_STATE, code);
     }
 
     @Override
-    public Optional<User> findByCode(String code) {
-        try {
-            User user = template.queryForObject(SQL_SELECT_BY_CODE, new Object[]{code}, userRowMapper);
-            return Optional.ofNullable(user);
-        }
-        catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+    public boolean isConfirmed(String code) {
+        User user = template.queryForObject(SQL_SELECT_BY_CODE, new Object[]{code}, userRowMapper);
+        return user.getState() == State.CONFIRMED;
     }
 
     @Override
@@ -121,8 +116,7 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
         try {
             User user = template.queryForObject(SQL_SELECT_BY_EMAIL, new Object[]{email}, userRowMapper);
             return Optional.ofNullable(user);
-        }
-        catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }

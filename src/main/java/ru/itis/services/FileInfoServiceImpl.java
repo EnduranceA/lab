@@ -1,6 +1,7 @@
 package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.helpers.FileInfoHelper;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class FileInfoServiceImpl implements FileInfoService {
 
     @Autowired
+    @Qualifier("fileInfoRepository")
     private FileInfoRepository fileRepository;
 
     @Autowired

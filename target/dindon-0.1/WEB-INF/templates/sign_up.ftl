@@ -11,7 +11,8 @@
 <h2>SIGN UP</h2>
 <div>
     <form action="/signUp" method="post">
-        <input name="username" placeholder="First name:">
+        <input name="firstName" placeholder="First name:">
+        <input name="lastName" placeholder="Last name:">
         <input name="email" placeholder="Email:">
         <input type="password" name="password" placeholder="Password: ">
         <input type="submit" value="SIGN UP">

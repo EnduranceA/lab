@@ -1,12 +1,521 @@
-GET http://localhost:8080/test
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
 
-<> 2020-03-02T042504.404.html
+<> 2020-04-02T120626.200.json
 
 ###
 
-GET http://localhost:8080/confirm/test
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
 
-<> 2020-03-02T041833.404.html
+<> 2020-04-02T120428.500.html
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T113326.200.json
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T112956.200.json
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T112230.500.html
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T111226.500.html
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T111212.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T111204.200.json
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T110056.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T110029.200.json
+
+###
+
+GET http://localhost:8080/api/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
+
+<> 2020-04-01T105131.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T105119.200.json
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T102922.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T102725.200.json
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T102208.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T100230.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T100143.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T100041.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T100034.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T100026.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095841.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095803.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095512.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095312.403.html
+
+###
+
+POST http://localhost:80/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+###
+
+POST http://localhost/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095236.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095122.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+<> 2020-04-01T095049.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+###
+
+POST http://localhost/api/signIn
+
+{
+"email": "elanskaya.lina@gmail.com",
+"password":"12345"
+}
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094754.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094748.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094653.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094650.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094637.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094625.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094556.403.html
+
+###
+
+GET http://localhost:8080/api/profile
+
+<> 2020-04-01T094555-1.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094555.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094430.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094314.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094140.500.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T094122.404.html
+
+###
+
+POST http://localhost/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+###
+
+GET http://localhost:8080/api/profile
+
+<> 2020-04-01T080301.403.html
+
+###
+
+POST http://localhost:8080/api/signIn
+Content-Type: application/json
+
+{
+  "email" : "elanskaya.lina@gmail.com",
+  "password": "12345"
+}
+
+<> 2020-04-01T080245.500.html
+
+###
+
+GET http://localhost:8080/api/profile
+
+<> 2020-04-01T080238.403.html
 
 ###
 

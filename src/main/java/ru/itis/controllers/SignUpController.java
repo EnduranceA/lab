@@ -1,30 +1,36 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.itis.dto.SignUpDto;
 import ru.itis.services.SignUpService;
 
-@Controller
+@RestController
 public class SignUpController {
 
     @Autowired
     private SignUpService signUpService;
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    @GetMapping("/signUp")
     public ModelAndView getSignUpPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("sign_up");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public ModelAndView signUp(@RequestParam("username") String username, @RequestParam("email")
-                                   String email, @RequestParam("password")String password) {
-        signUpService.signUp(username, email, password);
+   @PostMapping("/signUp")
+    public ModelAndView signUp(@RequestParam("firstName") String firstName,
+                               @RequestParam("lastName") String lastName,
+                               @RequestParam("email") String email,
+                               @RequestParam("password")String password) {
+       SignUpDto signUpDto = SignUpDto.builder()
+               .email(email)
+               .firstName(firstName)
+               .lastName(lastName)
+               .password(password)
+               .build();
+        signUpService.signUp(signUpDto);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("sign_up");
         return modelAndView;

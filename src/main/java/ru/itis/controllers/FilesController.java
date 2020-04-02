@@ -4,10 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.models.FileInfo;
@@ -27,7 +24,7 @@ public class FilesController {
     @Autowired
     private FileInfoService fileService;
 
-    @RequestMapping(value = "/files", method = RequestMethod.POST)
+    @PostMapping("/files")
     public ModelAndView uploadFile(@RequestParam("file") MultipartFile multipartFile,
                                    @RequestParam("email") String email) {
         ModelAndView modelAndView = new ModelAndView();
@@ -39,7 +36,7 @@ public class FilesController {
         return modelAndView;
     }
 
-    @RequestMapping(value ="/files/{file-name:.+}" , method = RequestMethod.GET)
+    @GetMapping("/files/{file-name:.+}")
     public void getFile(@PathVariable("file-name") String fileName,
                                 HttpServletResponse response) {
         FileInfo fileInfo = fileService.get(fileName);

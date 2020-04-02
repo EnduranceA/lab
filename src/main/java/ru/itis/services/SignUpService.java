@@ -1,5 +1,7 @@
 package ru.itis.services;
 
+import ru.itis.dto.SignUpDto;
+
 public interface SignUpService {
-    void signUp(String login, String email, String password);
+    void signUp(SignUpDto signUpDto);
 }

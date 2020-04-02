@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
-@Component(value = "fileInfoRepository")
+@Component
 public class FileInfoInfoRepositoryJdbcTemplateImpl implements FileInfoRepository {
 
     //language=SQL
