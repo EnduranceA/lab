@@ -8,9 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-<h2>My profile</h2>
+<h2>Profile</h2>
 <div>
-
+    <h3>My name:</h3> ${user.getFirstName()} ${user.getLastName()}
+    <h3>My email:</h3> ${user.getEmail()}
 </div>
 </body>
 </html>

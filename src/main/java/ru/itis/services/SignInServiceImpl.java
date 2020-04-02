@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.dto.SignInDto;
 import ru.itis.dto.TokenDto;
+import ru.itis.helpers.JwtHelper;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 
@@ -19,6 +20,9 @@ public class SignInServiceImpl implements SignInService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtHelper jwtHelper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,13 +43,7 @@ public class SignInServiceImpl implements SignInService {
                 // если пароль подходит
                 if (passwordEncoder.matches(signInDto.getPassword(), user.getHashPassword())) {
                     // создаем токен
-                    String token = Jwts.builder()
-                            .setSubject(user.getId().toString()) // id пользователя
-                            .claim("email", user.getEmail()) // имя
-                            .claim("role", user.getRole().name()) // роль
-                            .signWith(SignatureAlgorithm.HS256, secret) // подписываем его с нашим secret
-                            .compact(); // преобразовали в строку
-                    System.out.println(token);
+                    String token = jwtHelper.createToken(user);
                     return new TokenDto(token);
                 } else throw new AccessDeniedException("Not confirmed code");
             } else throw new AccessDeniedException("Wrong email/password");

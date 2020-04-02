@@ -1,11 +1,16 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.dto.SignInDto;
+import ru.itis.dto.TokenDto;
 import ru.itis.services.SignInService;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class SignInController {
@@ -19,14 +24,11 @@ public class SignInController {
     }
 
     @PostMapping("/signIn")
-    public String signIn(@RequestParam("email") String email,
-                         @RequestParam("password") String password) {
-        SignInDto dto = new SignInDto();
-        dto.setEmail(email); dto.setPassword(password);
-        signInService.signIn(dto);
+    public String signIn(SignInDto signInDto, HttpServletResponse servletResponse) {
+        TokenDto tokenDto = signInService.signIn(signInDto);
+        Cookie tokenCookie = new Cookie("Authorization", tokenDto.getToken());
+        servletResponse.addCookie(tokenCookie);
         return "redirect:/profile";
+
     }
-
-
-
 }

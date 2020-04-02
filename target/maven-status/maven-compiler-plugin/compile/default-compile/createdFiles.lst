@@ -1,14 +1,17 @@
+ru\itis\security\config\WebSecurityConfig$ApiTokenSecurityConfig.class
 ru\itis\controllers\RootController.class
 ru\itis\listeners\SpringContextServletContextListener.class
 ru\itis\repositories\UserRepository.class
 ru\itis\security\jwt\details\UserDetailsImpl.class
 ru\itis\controllers\RestControllers.class
+ru\itis\helpers\JwtHelper.class
 ru\itis\controllers\SignInController.class
 ru\itis\config\ApplicationContextConfig.class
 ru\itis\security\jwt\filter\JwtAuthenticationFilter.class
 ru\itis\models\FileInfo.class
 ru\itis\services\EmailService.class
 ru\itis\dto\TokenDto.class
+ru\itis\security\jwt\filter\TokenFilter.class
 ru\itis\repositories\FileInfoRepositoryJpaImpl.class
 ru\itis\services\FileInfoService.class
 ru\itis\services\MessageGenerationServiceImpl.class
@@ -19,6 +22,7 @@ ru\itis\models\User.class
 ru\itis\aspects\FilesAspect.class
 ru\itis\controllers\ConfirmController.class
 ru\itis\repositories\FileInfoInfoRepositoryJdbcTemplateImpl.class
+ru\itis\dto\SignUpDto.class
 ru\itis\repositories\CrudRepository.class
 ru\itis\dto\UserDto.class
 ru\itis\repositories\UserRepositoryJdbcTemplateImpl.class
@@ -34,6 +38,7 @@ ru\itis\security\jwt\authentication\JwtAuthentication.class
 ru\itis\helpers\FileInfoHelper.class
 ru\itis\services\SignInServiceImpl.class
 ru\itis\repositories\FileInfoRepository.class
+ru\itis\dto\SignUpDto$SignUpDtoBuilder.class
 ru\itis\services\ConfirmServiceImpl.class
 ru\itis\services\MessageGenerationService.class
 ru\itis\security\jwt\provider\JwtAuthenticationProvider.class
@@ -41,6 +46,7 @@ ru\itis\dto\SignInDto.class
 ru\itis\handler\RestExceptionHandler.class
 ru\itis\models\User$UserBuilder.class
 ru\itis\services\SignUpService.class
+ru\itis\security\config\WebSecurityConfig$ApiWebSecurityConfig.class
 ru\itis\models\FileInfo$FileInfoBuilder.class
 ru\itis\services\ConfirmService.class
 ru\itis\services\EmailServiceImpl.class

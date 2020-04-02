@@ -1,5 +1,6 @@
 package ru.itis.security.jwt.details;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.Collections;
 
 @Builder
 @Getter
+@AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
     private Long userId;
