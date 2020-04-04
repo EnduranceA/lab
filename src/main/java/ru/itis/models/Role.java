@@ -1,5 +1,5 @@
 package ru.itis.models;
 
 public enum Role {
-    ADMIN, USER
+    ADMIN, USER, SINGER
 }

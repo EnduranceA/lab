@@ -9,12 +9,9 @@ import ru.itis.models.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Data
 public class UserDto {
-
     private Long id;
     private String email;
     private Role role;
@@ -25,11 +22,5 @@ public class UserDto {
                 .email(user.getEmail())
                 .role(user.getRole())
                 .build();
-    }
-
-    public static List<UserDto> from(List<User> users) {
-        return users.stream()
-                .map(UserDto::from)
-                .collect(Collectors.toList());
     }
 }

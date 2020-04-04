@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.itis.helpers.FileInfoHelper;
 import ru.itis.models.FileInfo;
 import ru.itis.repositories.FileInfoRepository;
+import ru.itis.services.interfaces.FileInfoService;
+
 import java.util.Optional;
 
 @Service

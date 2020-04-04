@@ -7,35 +7,32 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.itis.models.Role;
+import ru.itis.models.User;
 
 import java.util.Collection;
 import java.util.Collections;
 
-@Builder
-@Getter
+@Data
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private Long userId;
-    private String role;
-    private String email;
+    private User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
+        String role = user.getRole().toString();
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
         return Collections.singletonList(authority);
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getHashPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.user.getEmail();
     }
 
     @Override

@@ -8,8 +8,9 @@ import ru.itis.models.Role;
 import ru.itis.models.State;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
+import ru.itis.services.interfaces.EmailService;
+import ru.itis.services.interfaces.SignUpService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -26,19 +27,22 @@ public class SignUpServiceImpl implements SignUpService {
     private EmailService emailService;
 
     @Override
-    public void signUp(SignUpDto signUpDto) {
-        User user = User.builder()
-                .email(signUpDto.getEmail())
-                .firstName(signUpDto.getFirstName())
-                .lastName(signUpDto.getLastName())
-                .hashPassword(encoder.encode(signUpDto.getPassword()))
-                .role(Role.USER)
-                .state(State.NOT_CONFIRMED)
-                .confirmCode(UUID.randomUUID().toString())
-                .createdAt(LocalDateTime.now())
-                .build();
-        userRepository.save(user);
-
-        emailService.sendConfirmMessage(user.getConfirmCode(), user.getEmail());
+    public boolean signUp(SignUpDto signUpDto) {
+        if (!userRepository.findByEmail(signUpDto.getEmail()).isPresent()){
+            User user = User.builder()
+                    .email(signUpDto.getEmail())
+                    .firstName(signUpDto.getFirstName())
+                    .lastName(signUpDto.getLastName())
+                    .hashPassword(encoder.encode(signUpDto.getPassword()))
+                    .role(Role.valueOf(signUpDto.getRole()))
+                    .state(State.NOT_CONFIRMED)
+                    .confirmCode(UUID.randomUUID().toString())
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            userRepository.save(user);
+            emailService.sendConfirmMessage(user.getConfirmCode(), user.getEmail());
+            return true;
+        }
+        return false;
     }
 }

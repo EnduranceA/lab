@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 import ru.itis.models.FileInfo;
-import ru.itis.services.EmailService;
+import ru.itis.services.interfaces.EmailService;
 
 @Component
 @Aspect

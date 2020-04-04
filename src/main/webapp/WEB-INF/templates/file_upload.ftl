@@ -22,7 +22,6 @@
                 formData.append("file", file);
             });
             formData.append("email", document.getElementById("email").value)
-
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/files",
@@ -42,10 +41,8 @@
 <body>
 <div>
     <input type="file" id="file" name="file" placeholder="Имя файла..."/>
-    <input type="text" id="email" name="email" placeholder="YOUUUUR EMAIL"/>
-    <button onclick="sendFile()">
-        Upload file
-    </button>
+    <input type="text" id="email" name="email" placeholder="Your email"/>
+    <button onclick="sendFile()">Upload file</button>
     <input type="hidden" id="file_hidden">
     <div class="filename"></div>
 </div>

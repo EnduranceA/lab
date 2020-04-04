@@ -2,12 +2,25 @@ POST http://localhost:8080/api/signIn
 Content-Type: application/json
 
 {
-"email": "elanskaya.lina@gmail.com",
-"password":"12345"
+  "email": "elanskaya.lina@gmail.com",
+  "password":"12345"
 }
-
 ###
 
 GET http://localhost:8080/api/profile
 Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZW1haWwiOiJlbGFuc2theWEubGluYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiJ9.TjP_zyB27QPHF_ufT2P3hMTONnLJW0sM1xpM-p2-NZk
 ###
+
+POST http://localhost:8080/api/signUp
+Content-Type: application/json
+
+{
+  "email":"elanskaya.lina@gmail.com",
+  "firstName":"Vasilisa",
+  "lastName": "Super",
+  "password":"123455",
+  "role": "SINGER"
+}
+###
+
+

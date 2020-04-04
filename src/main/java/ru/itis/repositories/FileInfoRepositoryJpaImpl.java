@@ -1,7 +1,6 @@
 package ru.itis.repositories;
 
 import ru.itis.models.FileInfo;
-
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -11,6 +10,12 @@ import javax.transaction.Transactional;
 
 @Component(value = "fileInfoRepository")
 public class FileInfoRepositoryJpaImpl implements FileInfoRepository {
+
+    //language=HQL
+    private final static String HQL_FIND_ALL = "SELECT f FROM FileInfo f";
+
+    //language=HQL
+    private final static String HQL_FIND_BY_NAME = "SELECT f FROM FileInfo f WHERE f.storageFileName = ?1";
 
     @PersistenceContext
     private EntityManager entityManagerFactory;
@@ -22,7 +27,7 @@ public class FileInfoRepositoryJpaImpl implements FileInfoRepository {
 
     @Override
     public List<FileInfo> findAll() {
-        return null;
+        return entityManagerFactory.createQuery(HQL_FIND_ALL).getResultList();
     }
 
     @Override
@@ -38,7 +43,7 @@ public class FileInfoRepositoryJpaImpl implements FileInfoRepository {
 
     @Override
     public Optional<FileInfo> findByName(String name) {
-        FileInfo fileInfo = (FileInfo) entityManagerFactory.createQuery("select f from FileInfo f where f.storageFileName = :name").getResultList().get(0);
-        return Optional.of(fileInfo);
+        return Optional.ofNullable((FileInfo)entityManagerFactory.createQuery(HQL_FIND_BY_NAME)
+                .setParameter(1, name).getSingleResult());
     }
 }

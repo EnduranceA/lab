@@ -1,5 +1,6 @@
 package ru.itis.security.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +16,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.filter.GenericFilterBean;
 
+//включение безопасности
 @EnableWebSecurity
+//включение проверки безопасности через аннотации
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -69,7 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void configure(WebSecurity web) {
-            web.ignoring().antMatchers("/signIn", "/signUp", "/", "/confirm/**");
+            web.ignoring().antMatchers("/files","/files/**",
+                    "/signIn", "/signUp", "/", "/confirm/**");
         }
 
         @Override
@@ -84,6 +88,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .formLogin().loginPage("/signIn")
                     .usernameParameter("email")
+                    .and()
+                    .logout()
+                    .permitAll()
                     .and()
                     .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
             } catch (Exception e) {
