@@ -15,9 +15,7 @@ public class SignUpController {
 
     @GetMapping("/signUp")
     public ModelAndView getSignUpPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("sign_up");
-        return modelAndView;
+        return new ModelAndView("sign_up");
     }
 
    @PostMapping("/signUp")

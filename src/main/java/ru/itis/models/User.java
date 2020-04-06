@@ -1,15 +1,22 @@
 package ru.itis.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-
-@Builder
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "client")
+@ToString(exclude = "role")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -19,4 +26,7 @@ public class User {
     private State state;
     private LocalDateTime createdAt;
     private String confirmCode;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    private List<Song> songs = new ArrayList<>();
 }

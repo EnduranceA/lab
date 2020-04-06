@@ -5,13 +5,67 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+    </script>
     <title>Document</title>
+    <script>
+        function sendFile() {
+            // данные для отправки
+            let formData = new FormData();
+            // забрал файл из input
+            let files = ($('#file'))[0]['files'];
+            // добавляю файл в formData
+            [].forEach.call(files, function (file) {
+                formData.append("file", file);
+            });
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/profile",
+                data: formData,
+                processData: false,
+                contentType: false
+            })
+                .done(function (response) {
+                    alert(response)
+                })
+                .fail(function () {
+                    alert('Error')
+                });
+        }
+    </script>
 </head>
 <body>
 <h2>Profile</h2>
 <div>
     <h3>My name:</h3> ${user.getFirstName()} ${user.getLastName()}
-    <h3>My email:</h3> ${user.getEmail()}
+    <h3 >My email:</h3> ${user.email}
+    <#if user.role == "SINGER">
+        <h3>My uploaded songs</h3>
+        <#if user.songs?size != 0>
+            <#list user.songs as song>
+                <a href="${song.url}">${song.originalFileName}</a>
+            </#list>
+        <#else><p>Empty</p>
+        </#if>
+        <h3>Add new tracks</h3>
+        <div>
+            <input type="file" id="file" name="file" placeholder="Имя файла..."/>
+            <button onclick="sendFile()">Upload file</button>
+            <input type="hidden" id="file_hidden">
+            <div class="filename"></div>
+        </div>
+    <#elseif user.role == "USER">
+         <h3>My added songs</h3>
+        <#if user.songs?size != 0>
+            <#list user.songs as song>
+                <p>${song.url}</p>
+            </#list>
+            <#else><p>Empty</p>
+        </#if>
+    </#if>
 </div>
 </body>
 </html>

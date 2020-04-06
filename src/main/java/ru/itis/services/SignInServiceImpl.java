@@ -1,6 +1,7 @@
 package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,14 @@ import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.SignInService;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 public class SignInServiceImpl implements SignInService {
 
     @Autowired
+    @Qualifier("userRepository")
     private UserRepository userRepository;
 
     @Autowired
@@ -26,6 +29,7 @@ public class SignInServiceImpl implements SignInService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public TokenDto signIn(SignInDto signInDto) {
         // получаем пользователя по его email
         Optional<User> userOptional = userRepository.findByEmail(signInDto.getEmail());

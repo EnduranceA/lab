@@ -2,7 +2,7 @@ POST http://localhost:8080/api/signIn
 Content-Type: application/json
 
 {
-  "email": "elanskaya.lina@inbox.ru",
+  "email": "elanskaya.lina@gmail.com",
   "password":"12345"
 }
 ###

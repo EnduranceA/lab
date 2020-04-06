@@ -15,9 +15,7 @@ public class ConfirmController {
     @GetMapping("/confirm/{code}")
     public ModelAndView getConfirmation(@PathVariable("code") String confirmCode) {
         confirmService.confirmCode(confirmCode);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("confirm_page");
-        return modelAndView;
+        return new ModelAndView("confirm_page");
     }
 
 }

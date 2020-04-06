@@ -1,13 +1,12 @@
 package ru.itis.aspects;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
-import ru.itis.models.FileInfo;
+import ru.itis.models.Song;
 import ru.itis.services.interfaces.EmailService;
 
 @Component
@@ -18,11 +17,11 @@ public class FilesAspect {
     @Autowired
     private EmailService emailService;
 
-    @AfterReturning(pointcut = "pointcut()", returning = "fileInfo")
-    public void sendEmail(JoinPoint joinPoint, FileInfo fileInfo){
-        emailService.sendFileLinkMessage(fileInfo.getStorageFileName(), joinPoint.getArgs()[1].toString());
+    @AfterReturning(pointcut = "pointcut()", returning = "song")
+    public void sendEmail(Song song){
+        emailService.sendFileLinkMessage(song.getStorageFileName(),song.getAuthor().getEmail());
     }
 
-    @Pointcut("execution(* ru.itis.services.FileInfoServiceImpl.save(..))")
+    @Pointcut("execution(* ru.itis.services.SongServiceImpl.save(..))")
     public void pointcut(){}
 }
