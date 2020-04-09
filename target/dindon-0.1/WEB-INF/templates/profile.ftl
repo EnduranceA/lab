@@ -28,8 +28,8 @@
                 processData: false,
                 contentType: false
             })
-                .done(function (response) {
-                    alert(response)
+                .done(function (html) {
+                    $("#content").html(html);
                 })
                 .fail(function () {
                     alert('Error')
@@ -38,15 +38,21 @@
     </script>
 </head>
 <body>
-<h2>Profile</h2>
-<div>
+<div id = "content">
+    <h2>Profile</h2>
     <h3>My name:</h3> ${user.getFirstName()} ${user.getLastName()}
     <h3 >My email:</h3> ${user.email}
     <#if user.role == "SINGER">
         <h3>My uploaded songs</h3>
         <#if user.songs?size != 0>
             <#list user.songs as song>
-                <a href="${song.url}">${song.originalFileName}</a>
+                <li> ${song.originalFileName}
+                    <audio controls>
+                        <source src="${song.url}" type="audio/ogg">
+                        <source src="${song.url}" type="audio/mpeg">
+                        <a href="${song.url}">Скачать </a>
+                    </audio>
+                </li>
             </#list>
         <#else><p>Empty</p>
         </#if>
@@ -61,7 +67,11 @@
          <h3>My added songs</h3>
         <#if user.songs?size != 0>
             <#list user.songs as song>
-                <p>${song.url}</p>
+                <audio controls>
+                    <source src="${song.url}" type="audio/ogg">
+                    <source src="${song.url}" type="audio/mpeg">
+                    <a href="${song.url}">Скачать ${song.originalFileName}</a>
+                </audio>
             </#list>
             <#else><p>Empty</p>
         </#if>

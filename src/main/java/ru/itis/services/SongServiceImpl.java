@@ -11,6 +11,7 @@ import ru.itis.repositories.SongRepository;
 import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.SongService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,11 @@ public class SongServiceImpl implements SongService {
         Optional<Song> songOptional = songRepository.findByName(fileName);
         return songOptional.orElse(null);
     }
+
+    @Override
+    public List<Song> getSongs() {
+        return songRepository.findAll();
+    }
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.dto.SignInDto;
 import ru.itis.dto.TokenDto;
 import ru.itis.helpers.JwtHelper;
+import ru.itis.models.State;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.SignInService;
@@ -38,7 +39,7 @@ public class SignInServiceImpl implements SignInService {
             // получаем его
             User user = userOptional.get();
             //проверям, подтверждена ли регистрация
-            if(userRepository.isConfirmed(user.getConfirmCode())) {
+            if(user.getState().equals(State.CONFIRMED)) {
                 // если пароль подходит
                 if (passwordEncoder.matches(signInDto.getPassword(), user.getHashPassword())) {
                     // создаем токен

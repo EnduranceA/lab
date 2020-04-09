@@ -11,6 +11,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Component
@@ -28,6 +29,7 @@ public class SongHelper {
                 .type(file.getContentType())
                 .url("http://localhost:8080/files/" + fileName)
                 .author(user)
+                .createdAt(LocalDate.now())
                 .build();
     }
 

@@ -110,7 +110,10 @@ public class UserRepositoryJdbcTemplateImpl implements UserRepository {
     @Override
     public boolean isConfirmed(String code) {
         User user = template.queryForObject(SQL_SELECT_BY_CODE, new Object[]{code}, userRowMapper);
-        return user.getState() == State.CONFIRMED;
+        if (user != null) {
+            return user.getState().equals(State.CONFIRMED);
+        }
+        return false;
     }
 
     @Override

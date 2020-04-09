@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.itis.models.Song;
 import ru.itis.services.interfaces.SongService;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,6 @@ public class SongController {
     @Autowired
     private SongService songService;
 
-
     @GetMapping("/files/{file-name:.+}")
     public void getFile(@PathVariable("file-name") String fileName,
                                 HttpServletResponse response) {
@@ -35,5 +35,12 @@ public class SongController {
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @GetMapping("/songs")
+    public ModelAndView getSongPage() {
+        ModelAndView modelAndView = new ModelAndView("song");
+        modelAndView.addObject("songs", songService.getSongs());
+        return modelAndView;
     }
 }

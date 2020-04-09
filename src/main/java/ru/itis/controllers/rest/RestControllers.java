@@ -1,4 +1,4 @@
-package ru.itis.controllers.api;
+package ru.itis.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
