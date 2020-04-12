@@ -1,5 +1,6 @@
 package ru.itis.controllers.mvc;
 
+import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.MessageDto;
@@ -10,8 +11,6 @@ import java.util.Map;
 
 @RestController
 public class MessagesController {
-
-    //непрочитанные сообщения
     private static final Map<String, List<MessageDto>> messages = new HashMap<>();
 
     // получили сообщение от какой-либо страницы - мы его разошлем во все другие страницы
@@ -33,6 +32,7 @@ public class MessagesController {
                 pageMessages.notifyAll();
             }
         }
+
         return ResponseEntity.ok().build();
     }
 
@@ -40,7 +40,7 @@ public class MessagesController {
     @GetMapping("/messages")
     public ResponseEntity<List<MessageDto>> getMessagesForPage(@RequestParam("pageId") String pageId) {
         try {
-            // получили список сообщений для страницы и заблокировали его
+            // получили список сообшений для страницы и заблокировали его
             synchronized (messages.get(pageId)) {
                 // если нет сообщений уходим в ожидание
                 if (messages.get(pageId).isEmpty()) {

@@ -23,7 +23,6 @@ public class ProfileController {
     @Autowired
     private SongService songService;
 
-
     private User user;
 
     @GetMapping("/profile")

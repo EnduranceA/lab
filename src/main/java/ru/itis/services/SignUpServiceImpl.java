@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.dto.SignUpDto;
 import ru.itis.models.Role;
 import ru.itis.models.State;
@@ -11,8 +12,6 @@ import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.EmailService;
 import ru.itis.services.interfaces.SignUpService;
-
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

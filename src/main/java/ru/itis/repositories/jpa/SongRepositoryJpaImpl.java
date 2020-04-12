@@ -3,17 +3,17 @@ package ru.itis.repositories.jpa;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.models.Song;
 import ru.itis.repositories.SongRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Component(value = "songRepository")
 public class SongRepositoryJpaImpl implements SongRepository {
 
     //language=HQL
-    private final static String HQL_FIND_ALL = "SELECT f FROM Song f";
+    private final static String HQL_FIND_ALL = "FROM Song song";
 
     //language=HQL
     private final static String HQL_FIND_BY_NAME = "SELECT f FROM Song f WHERE f.storageFileName = ?1";

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageDto {
-    private String pageId;
     private String text;
+    private String pageId;
 }

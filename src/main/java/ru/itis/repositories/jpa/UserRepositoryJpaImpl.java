@@ -1,6 +1,7 @@
 package ru.itis.repositories.jpa;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.models.State;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
@@ -8,7 +9,6 @@ import ru.itis.repositories.UserRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 

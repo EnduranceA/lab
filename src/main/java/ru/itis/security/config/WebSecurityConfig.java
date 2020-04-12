@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin().loginPage("/signIn")
                     .usernameParameter("email")
                     .and()
-                    .logout()
+                    .logout().logoutSuccessUrl("/signIn")
                     .permitAll()
                     .and()
                     .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);

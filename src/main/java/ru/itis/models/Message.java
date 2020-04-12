@@ -1,7 +1,29 @@
 package ru.itis.models;
 
-public class Message {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class Message {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private User from;
+    private String pageId;
+    private String text;
+
+//    @ManyToOne
+//    @JoinColumn(name = "id_user_from")
+//    private User currentUser;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_user_to")
+//    private User to;
 }

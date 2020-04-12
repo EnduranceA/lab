@@ -1,13 +1,9 @@
 package ru.itis.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.itis.models.Role;
 import ru.itis.models.User;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Builder
 @Data

@@ -21,6 +21,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import javax.persistence.EntityManagerFactory;
@@ -51,7 +53,7 @@ public class ApplicationContextConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         return properties;
@@ -134,7 +136,7 @@ public class ApplicationContextConfig {
     @Bean
     public FreeMarkerConfig freeMarkerConfig() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-        freeMarkerConfigurer.setTemplateLoaderPath("WEB-INF/templates/");
+        freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates/");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         return freeMarkerConfigurer;
     }

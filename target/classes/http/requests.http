@@ -15,7 +15,7 @@ POST http://localhost:8080/api/signUp
 Content-Type: application/json
 
 {
-  "email":"elanskaya.lina@gmail.com",
+  "email":"elanskaya.lina@inbox.ru",
   "firstName":"Vasilisa",
   "lastName": "Super",
   "password":"123455",
