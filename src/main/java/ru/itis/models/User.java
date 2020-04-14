@@ -41,10 +41,10 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade=CascadeType.ALL)
     private List<Song> songs = new ArrayList<>();
-//
-//    //отправленные сообщения
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "currentUser", cascade=CascadeType.ALL)
-//    private List<Message> sentMessages = new ArrayList<>();
+
+    //отправленные сообщения
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sender", cascade=CascadeType.ALL)
+    private List<Message> sentMessages = new ArrayList<>();
 //
 //    //полученные сообщения
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "to", cascade=CascadeType.ALL)

@@ -24,10 +24,8 @@ public class UserRepositoryJpaImpl implements UserRepository {
     //language=HQL
     private final static String HQL_FIND_BY_CODE = "SELECT u FROM User u WHERE u.confirmCode = ?1";
 
-
     @PersistenceContext
     private EntityManager entityManagerFactory;
-
 
     @Override
     @Transactional

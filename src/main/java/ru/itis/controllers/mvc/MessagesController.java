@@ -1,9 +1,11 @@
 package ru.itis.controllers.mvc;
 
-import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.MessageDto;
+import ru.itis.services.interfaces.MessageService;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +13,20 @@ import java.util.Map;
 
 @RestController
 public class MessagesController {
-    private static final Map<String, List<MessageDto>> messages = new HashMap<>();
+
+    private static final Map<Long, List<MessageDto>> messages = new HashMap<>();
+
+    @Autowired
+    private MessageService messageService;
 
     // получили сообщение от какой-либо страницы - мы его разошлем во все другие страницы
     @PostMapping("/messages")
-    public ResponseEntity<Object> receiveMessage(@RequestBody MessageDto message) {
+    public ResponseEntity<Object> receiveMessage(@RequestBody MessageDto messageDto) {
+        messageService.save(messageDto);
         // если сообщений с этой или для этой страницы еще не было
-        if (!messages.containsKey(message.getPageId())) {
+        if (!messages.containsKey(messageDto.getUserId())) {
             // добавляем эту страницу в Map-у страниц
-            messages.put(message.getPageId(), new ArrayList<>());
+            messages.put(messageDto.getUserId(), new ArrayList<>());
         }
         // полученное сообщение добавляем для всех открытых страниц нашего приложения
         for (List<MessageDto> pageMessages : messages.values()) {
@@ -27,33 +34,32 @@ public class MessagesController {
             // мы список сообщений блокируем
             synchronized (pageMessages) {
                 // добавляем сообщение
-                pageMessages.add(message);
+                pageMessages.add(messageDto);
                 // говорим, что другие потоки могут воспользоваться этим списком
                 pageMessages.notifyAll();
             }
         }
-
         return ResponseEntity.ok().build();
     }
 
     // получить все сообщения для текущего запроса
     @GetMapping("/messages")
-    public ResponseEntity<List<MessageDto>> getMessagesForPage(@RequestParam("pageId") String pageId) {
+    public ResponseEntity<List<MessageDto>> getMessagesForPage(@RequestParam("userId") Long userId) {
         try {
-            // получили список сообшений для страницы и заблокировали его
-            synchronized (messages.get(pageId)) {
+            // получили список сообщений для страницы и заблокировали его
+            synchronized (messages.get(userId)) {
                 // если нет сообщений уходим в ожидание
-                if (messages.get(pageId).isEmpty()) {
-                    messages.get(pageId).wait();
+                if (messages.get(userId).isEmpty()) {
+                    messages.get(userId).wait();
                 }
             }
             // если сообщения есть - то кладем их в новых список
-            List<MessageDto> response = new ArrayList<>(messages.get(pageId));
+            List<MessageDto> response = new ArrayList<>(messages.get(userId));
             // удаляем сообщения из мапы
-            messages.get(pageId).clear();
+            messages.get(userId).clear();
             return ResponseEntity.ok(response);
         } catch (InterruptedException e) {
-           throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 }

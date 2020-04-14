@@ -23,4 +23,13 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+  "text":"jkdslkvdls",
+  "pageId": "FIRST-PAGE"
+}
+###
+
 

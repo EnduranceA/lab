@@ -11,19 +11,15 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Entity
 public class Message {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String pageId;
+
     private String text;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_user_from")
-//    private User currentUser;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "id_user_to")
-//    private User to;
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 }

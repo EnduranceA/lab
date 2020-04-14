@@ -12,7 +12,7 @@ public class FreeMakerConfig {
     @Bean
     public FreeMarkerConfigurationFactoryBean freeMarkerConfiguration() {
         FreeMarkerConfigurationFactoryBean fmConfigFactoryBean = new FreeMarkerConfigurationFactoryBean();
-        fmConfigFactoryBean.setTemplateLoaderPath("classpath:/templates/");
+        fmConfigFactoryBean.setTemplateLoaderPath("/WEB-INF/templates/");
         return fmConfigFactoryBean;
     }
 

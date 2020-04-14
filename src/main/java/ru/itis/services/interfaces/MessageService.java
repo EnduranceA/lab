@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MessageService {
     List<Message> findAll();
-    void save(MessageDto message, User user);
+    void save(MessageDto message);
 }
