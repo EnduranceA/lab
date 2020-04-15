@@ -9,4 +9,5 @@ import java.util.List;
 public interface MessageService {
     List<Message> findAll();
     void save(MessageDto message);
+    void updateMessage(MessageDto dto);
 }

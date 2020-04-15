@@ -10,6 +10,8 @@ import ru.itis.models.User;
 import ru.itis.repositories.MessageRepository;
 import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.MessageService;
+
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,9 +38,20 @@ public class MessageServiceImpl implements MessageService {
             Message message = Message.builder()
                     .text(messageDto.getText())
                     .sender(user.get())
+                    .answer("Expect an answer")
                     .build();
             messageRepository.save(message);
         }
+    }
 
+    @Override
+    @Transactional
+    public void updateMessage(MessageDto messageDto) {
+        Optional<Message> messageOptional = messageRepository.find(messageDto.getUserId());
+        if (messageOptional.isPresent()) {
+            Message message = messageOptional.get();
+            message.setAnswer(messageDto.getText());
+            messageRepository.update(message);
+        }
     }
 }

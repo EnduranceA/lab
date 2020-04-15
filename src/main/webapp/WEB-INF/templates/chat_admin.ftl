@@ -18,34 +18,31 @@
 <body>
 <h1>SUPPORT</h1>
 <div>
-    <h3>Hello! This is a support service. Ask your question, please</h3>
-    <input id="message" class="messageInput" placeholder="Your message">
-    <button onclick="sendMessage('${userId}' ,$('#message').val())" class="btn btn-dark">Send</button>
-</div>
-<div>
-    <h4>New questions</h4>
-    <ul id="messages">
-
-    </ul>
-    <h4>Previously asked questions</h4>
     <#if listMessages?size != 0>
         <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Question</th>
-            <th scope="col">Answer</th>
-        </tr>
-        </thead>
-        <tbody>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Question</th>
+                <th scope="col">Answer</th>
+            </tr>
+            </thead>
+            <tbody>
             <#list listMessages as message>
                 <tr>
                     <td>${message.sender.firstName}  ${message.sender.lastName}</td>
                     <td>${message.text}</td>
-                    <td>${message.answer}</td>
+                    <td>
+                    <#if message.answer == "Expect an answer">
+                        <input id="${message.id}" placeholder="Your message">
+                        <button onclick="sendResponse('${message.id}','${userId}', $('#${message.id}').val())" class="btn btn-dark">Send</button>
+                    <#else> ${message.answer}
+                    </#if>
+                    </td>
+
                 </tr>
             </#list>
-        </tbody>
+            </tbody>
         </table>
     </#if>
 </div>

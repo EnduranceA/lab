@@ -7,6 +7,6 @@
     <context:component-scan base-package="ru.itis"/>
 
     <mvc:annotation-driven/>
-    <mvc:resources mapping="/js/**" location="/static/js/"/>
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+    <mvc:resources mapping="/static/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/static/css/**" location="/static/css/"/>
 </beans>

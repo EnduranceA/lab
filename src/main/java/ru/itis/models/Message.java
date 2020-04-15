@@ -22,4 +22,6 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "sender_id")
     private User sender;
+
+    private String answer;
 }

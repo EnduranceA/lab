@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.MessageDto;
+import ru.itis.models.Message;
 import ru.itis.services.interfaces.MessageService;
 
 import java.util.ArrayList;
@@ -61,5 +62,11 @@ public class MessagesController {
         } catch (InterruptedException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @PostMapping("/admin/messages")
+    public ResponseEntity<Object> updateAnswer(@RequestBody MessageDto dto) {
+        messageService.updateMessage(dto);
+        return ResponseEntity.ok().build();
     }
 }

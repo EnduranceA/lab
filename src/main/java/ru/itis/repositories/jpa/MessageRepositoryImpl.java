@@ -3,6 +3,7 @@ package ru.itis.repositories.jpa;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itis.models.Message;
+import ru.itis.models.Song;
 import ru.itis.repositories.MessageRepository;
 
 import javax.persistence.EntityManager;
@@ -21,8 +22,8 @@ public class MessageRepositoryImpl implements MessageRepository {
     private static final String HQL_FIND_ALL = "From Message message";
 
     @Override
-    public Optional<Message> find(Long aLong) {
-        return Optional.empty();
+    public Optional<Message> find(Long id) {
+        return Optional.ofNullable(entityManagerFactory.find(Message.class, id));
     }
 
     @Override
@@ -40,5 +41,10 @@ public class MessageRepositoryImpl implements MessageRepository {
     @Override
     public void delete(Long aLong) {
 
+    }
+
+    @Override
+    public void update(Message message) {
+        entityManagerFactory.merge(message);
     }
 }
