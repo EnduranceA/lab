@@ -2,7 +2,6 @@ package ru.itis.repositories;
 
 import org.springframework.stereotype.Component;
 import ru.itis.models.Room;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;

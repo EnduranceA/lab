@@ -11,6 +11,7 @@ import org.springframework.web.socket.server.HandshakeFailureException;
 import org.springframework.web.socket.server.HandshakeHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import org.springframework.web.util.WebUtils;
+import ru.itis.models.CookieValue;
 import ru.itis.services.CookieValuesService;
 import javax.servlet.http.Cookie;
 import java.util.Map;
@@ -31,7 +32,9 @@ public class AuthHandshakeHandler implements HandshakeHandler {
             ServletServerHttpRequest request = (ServletServerHttpRequest)serverHttpRequest;
             Cookie cookie = WebUtils.getCookie(request.getServletRequest(), "AuthCookie");
             if (cookie != null) {
-                if(cookieValuesService.isExist(cookie.getValue())) {
+                CookieValue cookieValue = cookieValuesService.get(cookie.getValue());
+                if(cookieValue != null) {
+                    map.put("userId", cookieValue.getUser().getId());
                     return defaultHandshakeHandler.doHandshake(serverHttpRequest, serverHttpResponse, webSocketHandler, map);
                 }
             }

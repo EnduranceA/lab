@@ -31,6 +31,11 @@ public class WebSocketMessagesHandler extends TextWebSocketHandler {
     private ChatService chatService;
 
     @Override
+    public void afterConnectionEstablished(WebSocketSession session) {
+        sessions.put((Long) session.getAttributes().get("userId"),session);
+    }
+
+    @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) {
         try {
             //.getPayload() - получение сообщения в формате JSON

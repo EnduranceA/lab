@@ -31,13 +31,11 @@
             };
             webSocket.send(JSON.stringify(body))
         }
-
         function joinRoom() {
             let body = {
                 userId: '${userId}',
                 roomIdentifier: '${roomIdentifier}'
             };
-
             $.ajax({
                 url: "/connect",
                 type: "POST",

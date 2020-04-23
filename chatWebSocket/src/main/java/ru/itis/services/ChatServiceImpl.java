@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itis.models.Room;
 import ru.itis.repositories.RoomRepository;
-
 import java.util.*;
 
 @Component

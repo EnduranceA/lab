@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "client")
+@ToString(exclude = "messages")
 public class User {
 
     @Id

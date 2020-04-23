@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@ToString(exclude = "room")
+@ToString(exclude = {"room", "user"})
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

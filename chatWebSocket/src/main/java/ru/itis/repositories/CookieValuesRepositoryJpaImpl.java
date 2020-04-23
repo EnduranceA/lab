@@ -2,7 +2,6 @@ package ru.itis.repositories;
 
 import org.springframework.stereotype.Component;
 import ru.itis.models.CookieValue;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
