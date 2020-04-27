@@ -17,16 +17,15 @@ import java.util.List;
 @Controller
 public class ChatController {
 
-    private User user;
-
     @Autowired
     private MessageService messageService;
 
     @GetMapping("/chat")
+    @PreAuthorize("isAuthenticated()")
     public String getChatPage(Model model) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        user = userDetails.getUser();
+        User user = userDetails.getUser();
         List<Message> messages = messageService.findAll();
         model.addAttribute("listMessages", messages);
         model.addAttribute("userId", user.getId());

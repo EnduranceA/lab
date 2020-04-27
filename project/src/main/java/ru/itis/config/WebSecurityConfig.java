@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.GenericFilterBean;
@@ -71,27 +72,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         private PasswordEncoder passwordEncoder;
 
         @Autowired
+        private PersistentTokenRepository persistentTokenRepository;
+
+        @Autowired
         @Qualifier("customUserServiceImpl")
         private UserDetailsService userDetailsService;
 
         @Override
         protected void configure(HttpSecurity http) {
             try {
-                http.authorizeRequests()
-                        .antMatchers("/profile").authenticated()
-                        .antMatchers("/signUp").permitAll()
-                        .antMatchers("/admin/**").hasAuthority("ADMIN")
-                        .antMatchers("/chat").authenticated();
+                http.rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository);
 
                 http.formLogin().loginPage("/signIn")
                         .failureUrl("/signIn?error")
                         .defaultSuccessUrl("/profile")
                         .usernameParameter("email");
 
+                http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/signIn")
+                        .deleteCookies("JSESSIONID", "remember-me")
+                        .invalidateHttpSession(true);
+
+
             } catch (Exception e) {
                 throw new IllegalArgumentException(e);
             }
         }
+
+
+
 
         @Autowired
         @Override

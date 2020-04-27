@@ -2,6 +2,7 @@ package ru.itis.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.Map;
 @Builder
 @Entity
 @Table(name = "client")
-@ToString(exclude = {"songs","sentMessages", "receivedMessages" })
-public class User {
+@ToString(exclude = {"songs", "sentMessages"})
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

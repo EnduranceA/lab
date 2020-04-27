@@ -16,7 +16,7 @@ import ru.itis.services.interfaces.RestSignInService;
 import java.util.Optional;
 
 @Service(value = "signInServiceRest")
-public class SignInServiceImpl implements RestSignInService {
+public class RestSignInServiceImpl implements RestSignInService {
 
     @Autowired
     private JwtHelper jwtHelper;
