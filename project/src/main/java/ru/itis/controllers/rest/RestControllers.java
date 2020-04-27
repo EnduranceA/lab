@@ -1,6 +1,7 @@
 package ru.itis.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +17,7 @@ import ru.itis.dto.TokenDto;
 import ru.itis.dto.UserDto;
 import ru.itis.models.User;
 import ru.itis.security.jwt.details.UserDetailsImpl;
+import ru.itis.services.interfaces.RestSignInService;
 import ru.itis.services.interfaces.SignInService;
 import ru.itis.services.interfaces.SignUpService;
 import ru.itis.services.interfaces.UserService;
@@ -24,7 +26,7 @@ import ru.itis.services.interfaces.UserService;
 public class RestControllers {
 
     @Autowired
-    public SignInService signInService;
+    public RestSignInService signInService;
 
     @Autowired
     public SignUpService signUpService;
@@ -36,6 +38,7 @@ public class RestControllers {
     public ResponseEntity<TokenDto> signIn(@RequestBody SignInDto signInDto) {
         return ResponseEntity.ok(signInService.signIn(signInDto));
     }
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/api/profile")

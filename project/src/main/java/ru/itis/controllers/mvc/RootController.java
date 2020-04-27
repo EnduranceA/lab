@@ -10,7 +10,7 @@ public class RootController {
     @GetMapping("/")
     public String getRootPage(Authentication authentication) {
         if (authentication != null) {
-            return "redirect:/files";
+            return "redirect:/profile";
         }
         return "redirect:/signIn";
     }

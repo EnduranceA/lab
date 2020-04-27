@@ -2,6 +2,7 @@ package ru.itis.controllers.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.MessageDto;
 import ru.itis.models.Message;
@@ -25,10 +26,6 @@ public class MessagesController {
     public ResponseEntity<Object> receiveMessage(@RequestBody MessageDto messageDto) {
         messageService.save(messageDto);
         // если сообщений с этой или для этой страницы еще не было
-        if (!messages.containsKey(messageDto.getUserId())) {
-            // добавляем эту страницу в Map-у страниц
-            messages.put(messageDto.getUserId(), new ArrayList<>());
-        }
         // полученное сообщение добавляем для всех открытых страниц нашего приложения
         for (List<MessageDto> pageMessages : messages.values()) {
             // перед тем как положить сообщение для какой-либо страницы
@@ -47,6 +44,10 @@ public class MessagesController {
     @GetMapping("/messages")
     public ResponseEntity<List<MessageDto>> getMessagesForPage(@RequestParam("userId") Long userId) {
         try {
+            if (!messages.containsKey(userId)) {
+                // добавляем эту страницу в Map-у страниц
+                messages.put(userId, new ArrayList<>());
+            }
             // получили список сообщений для страницы и заблокировали его
             synchronized (messages.get(userId)) {
                 // если нет сообщений уходим в ожидание
@@ -64,6 +65,7 @@ public class MessagesController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/admin/messages")
     public ResponseEntity<Object> updateAnswer(@RequestBody MessageDto dto) {
         messageService.updateMessage(dto);

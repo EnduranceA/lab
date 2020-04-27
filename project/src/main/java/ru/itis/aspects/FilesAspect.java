@@ -22,6 +22,6 @@ public class FilesAspect {
         emailService.sendFileLinkMessage(song.getStorageFileName(),song.getAuthor().getEmail());
     }
 
-    @Pointcut("execution(* ru.itis.services.SongServiceImpl.save(..))")
+    @Pointcut("execution(* ru.itis.services.impl.mvc.SongServiceImpl.save(..))")
     public void pointcut(){}
 }

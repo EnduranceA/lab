@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
     <script src="/static/js/chat.js"></script>
 </head>
-<body>
+<body onload="receiveMessage('${userId}')">
 <h1>SUPPORT</h1>
 <div>
     <h3>Hello! This is a support service. Ask your question, please</h3>

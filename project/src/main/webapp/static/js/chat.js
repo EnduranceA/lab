@@ -9,10 +9,7 @@ function sendMessage(userId, text) {
         method: "POST",
         data: JSON.stringify(body),
         contentType: "application/json",
-        dataType: "json",
-        complete: function () {
-            receiveMessage(userId)
-        }
+        dataType: "json"
     });
 }
 
@@ -24,14 +21,7 @@ function receiveMessage(userId) {
         dataType: "json",
         contentType: "application/json",
         success: function (response) {
-            $('#messages').first().after('<li class="list-group-item">' + response[0]['text'] + '</li>' +
-                '<div class="alert alert-success" role="alert">' +
-                '  <h4 class="alert-heading">Well done!</h4>' +
-                '  <p>You have successfully added your question. Please expect a response from administrators soon.</p>' +
-                '  <hr>' +
-                '  <p class="mb-0">Thank you!</p>' +
-                '</div>'
-            );
+            $('#messages').first().after('<li class="list-group-item">' + response[0]['text'] + '</li>');
             receiveMessage(userId);
         }
     })

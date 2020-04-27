@@ -1,4 +1,4 @@
-package ru.itis.services;
+package ru.itis.services.impl.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;

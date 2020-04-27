@@ -1,4 +1,4 @@
-package ru.itis.services;
+package ru.itis.services.impl.mvc;
 
 import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class MessageGenerationServiceImpl implements MessageGenerationService {
     private String userName;
 
     @Autowired
-    public Configuration freeMakerConfiguration;
+    public Configuration freeMarkerConfig;
 
     @Override
     public MimeMessagePreparator createMessage(String subject, String text, String email) {
@@ -41,7 +41,7 @@ public class MessageGenerationServiceImpl implements MessageGenerationService {
         try {
             content.append(FreeMarkerTemplateUtils
                     .processTemplateIntoString(
-                            freeMakerConfiguration.getTemplate("mail.ftl"), model));
+                            freeMarkerConfig.getTemplate("mail.ftl"), model));
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }

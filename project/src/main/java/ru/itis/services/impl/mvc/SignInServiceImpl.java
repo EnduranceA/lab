@@ -1,4 +1,4 @@
-package ru.itis.services;
+package ru.itis.services.impl.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +15,7 @@ import ru.itis.repositories.UserRepository;
 import ru.itis.services.interfaces.SignInService;
 import java.util.Optional;
 
-@Service
+@Service(value = "signInServiceMvc")
 public class SignInServiceImpl implements SignInService {
 
     @Autowired
@@ -23,27 +23,17 @@ public class SignInServiceImpl implements SignInService {
     private UserRepository userRepository;
 
     @Autowired
-    private JwtHelper jwtHelper;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
-    public TokenDto signIn(SignInDto signInDto) {
-        // получаем пользователя по его email
+    public boolean signIn(SignInDto signInDto) {
         Optional<User> userOptional = userRepository.findByEmail(signInDto.getEmail());
-        // если у меня есть этот пользвователь
         if (userOptional.isPresent()) {
-            // получаем его
             User user = userOptional.get();
-            //проверям, подтверждена ли регистрация
             if(user.getState().equals(State.CONFIRMED)) {
-                // если пароль подходит
                 if (passwordEncoder.matches(signInDto.getPassword(), user.getHashPassword())) {
-                    // создаем токен
-                    String token = jwtHelper.createToken(user);
-                    return new TokenDto(token);
+                    return true;
                 } else throw new AccessDeniedException("Wrong email/password");
             } else throw new AccessDeniedException("Not confirmed code");
         } else throw new AccessDeniedException("User not found");

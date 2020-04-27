@@ -39,7 +39,6 @@
                     <#else> ${message.answer}
                     </#if>
                     </td>
-
                 </tr>
             </#list>
             </tbody>

@@ -1,4 +1,4 @@
-package ru.itis.security.config;
+package ru.itis.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.GenericFilterBean;
+import ru.itis.models.Role;
 
 //включение безопасности
 @EnableWebSecurity
@@ -64,35 +68,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static class ApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private AuthenticationProvider authenticationProvider;
+        private PasswordEncoder passwordEncoder;
 
         @Autowired
-        @Qualifier(value = "tokenFilter")
-        private GenericFilterBean tokenFilter;
-
-        @Override
-        public void configure(WebSecurity web) {
-            web.ignoring().antMatchers("/files","/files/**",
-                    "/signIn", "/signUp", "/", "/confirm/**");
-        }
+        @Qualifier("customUserServiceImpl")
+        private UserDetailsService userDetailsService;
 
         @Override
         protected void configure(HttpSecurity http) {
             try {
-            http.csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/admin")
-                    .hasAuthority("ADMIN")
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                    .formLogin().loginPage("/signIn")
-                    .usernameParameter("email")
-                    .and()
-                    .logout().logoutSuccessUrl("/signIn")
-                    .permitAll()
-                    .and()
-                    .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+                http.authorizeRequests()
+                        .antMatchers("/profile").authenticated()
+                        .antMatchers("/signUp").permitAll()
+                        .antMatchers("/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/chat").authenticated();
+
+                http.formLogin().loginPage("/signIn")
+                        .failureUrl("/signIn?error")
+                        .defaultSuccessUrl("/profile")
+                        .usernameParameter("email");
+
             } catch (Exception e) {
                 throw new IllegalArgumentException(e);
             }
@@ -101,8 +96,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Autowired
         @Override
         protected void configure(AuthenticationManagerBuilder auth) {
-            auth.authenticationProvider(authenticationProvider);
+            try {
+                auth.userDetailsService(userDetailsService)
+                        .passwordEncoder(passwordEncoder);
+            } catch (Exception e) {
+                throw new IllegalArgumentException(e);
+            }
         }
+
     }
 
 }
