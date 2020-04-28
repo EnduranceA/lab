@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) {
             try {
+
                 http.rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository);
 
                 http.formLogin().loginPage("/signIn")
@@ -93,14 +94,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .deleteCookies("JSESSIONID", "remember-me")
                         .invalidateHttpSession(true);
 
-
             } catch (Exception e) {
                 throw new IllegalArgumentException(e);
             }
         }
-
-
-
 
         @Autowired
         @Override

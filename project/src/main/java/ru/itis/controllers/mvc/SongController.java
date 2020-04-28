@@ -3,10 +3,14 @@ package ru.itis.controllers.mvc;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.models.Song;
+import ru.itis.models.User;
+import ru.itis.security.jwt.details.UserDetailsImpl;
 import ru.itis.services.interfaces.SongService;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -43,5 +47,14 @@ public class SongController {
         ModelAndView modelAndView = new ModelAndView("song");
         modelAndView.addObject("songs", songService.getSongs());
         return modelAndView;
+    }
+
+    @PostMapping("/song")
+    @PreAuthorize("isAuthenticated()")
+    public void addSongToMyMusic(Long songId) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        User user = userDetails.getUser();
+        songService.addSong(songId, user.getSongs());
     }
 }

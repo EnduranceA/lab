@@ -5,6 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <script
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -13,6 +15,8 @@
     <title>Document</title>
     <script>
         function sendFile() {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
             // данные для отправки
             let formData = new FormData();
             // забрал файл из input
@@ -21,9 +25,12 @@
             [].forEach.call(files, function (file) {
                 formData.append("file", file);
             });
+
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/profile",
+                beforeSend: function(request) {
+                    request.setRequestHeader(header, token);},
+                url: "/profile/file",
                 data: formData,
                 processData: false,
                 contentType: false
@@ -38,7 +45,7 @@
     </script>
 </head>
 <body>
-<div id = "content">
+<div id="content">
     <h2>Profile</h2>
     <h3>My name:</h3> ${user.getFirstName()} ${user.getLastName()}
     <h3 >My email:</h3> ${user.email}
@@ -56,6 +63,7 @@
             </#list>
         <#else><p>Empty</p>
         </#if>
+        <div id="music"></div>
         <h3>Add new tracks</h3>
         <div>
             <input type="file" id="file" name="file" placeholder="Имя файла..."/>
@@ -64,7 +72,7 @@
             <div class="filename"></div>
         </div>
     <#elseif user.role == "USER">
-         <h3>My added songs</h3>
+        <h3>My added songs</h3>
         <#if user.songs?size != 0>
             <#list user.songs as song>
                 <audio controls>
@@ -73,7 +81,7 @@
                     <a href="${song.url}">Скачать ${song.originalFileName}</a>
                 </audio>
             </#list>
-            <#else><p>Empty</p>
+        <#else><p>Empty</p>
         </#if>
     </#if>
 </div>

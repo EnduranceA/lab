@@ -7,6 +7,23 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Music</title>
+    <script>
+        function addToMyMusic(song_id) {
+            $.ajax ({
+                type:"POST",
+                url: "/song",
+                data: {
+                    "song_id" : song_id
+                },
+                success: function () {
+                    $("#buttonchik").html("");
+                    $('#buttonchik').append(
+                        "<input type=\"button\" class=\"floated\" id=\"addToBasket\"  value=\"Добавлено\" >"
+                    )
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <h2>SONGS</h2>
@@ -28,7 +45,12 @@
             <td>${song.author.firstName} ${song.author.lastName}</td>
             <td>${song.originalFileName}</td>
             <td><audio style="height: 30px;" src="${song.url}" type="audio/mpeg" controls></audio></td>
-            <td>+</td>
+            <td>
+                <di id="buttonchik">
+                    <input type="button" name="go-to-list" class="btns bask"
+                           value="В корзину" onclick=addToMyMusic(${song.id})>
+                </di>
+            </td>
         </tr>
     </#list>
     </tbody>

@@ -36,8 +36,7 @@ public class ProfileController {
         return modelAndView;
     }
 
-
-    @PostMapping("/profile")
+    @PostMapping("/profile/file")
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) {
         //проверяем, что файл не пустой
         if (!multipartFile.isEmpty()) {

@@ -10,4 +10,5 @@ public interface SongService {
     Song save(MultipartFile file, User user);
     Song get(String fileName);
     List<Song> getSongs();
+    void addSong(Long songId, List<Song> songs);
 }

@@ -29,6 +29,7 @@ public class SongServiceImpl implements SongService {
     public Song save(MultipartFile file, User user) {
         Song song = helper.convert(file, user);
         songRepository.save(song);
+        user.getSongs().add(song);
         helper.uploadFile(song, file);
         return song;
     }
@@ -42,6 +43,15 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> getSongs() {
         return songRepository.findAll();
+    }
+
+    @Override
+    public void addSong(Long songId, List<Song> songs) {
+        Optional<Song> songOptional = songRepository.find(songId);
+        if (songOptional.isPresent()) {
+            Song song = songOptional.get();
+            songs.add(song);
+        }
     }
 
 
