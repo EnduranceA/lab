@@ -19,11 +19,11 @@ public class SignInController {
         return "sign_in";
     }
 
-    @PostMapping("/signIn")
-    public String signIn(SignInDto signInDto) {
-        if (signInService.signIn(signInDto)) {
-            return "redirect:/profile";
-        }
-        return "redirect:/signIn?error";
-    }
+//    @PostMapping("/signIn")
+//    public String signIn(SignInDto signInDto) {
+//        if (signInService.signIn(signInDto)) {
+//            return "redirect:/profile";
+//        }
+//        return "redirect:/signIn?error";
+//    }
 }

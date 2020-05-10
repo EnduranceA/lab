@@ -18,11 +18,11 @@ import java.util.Optional;
 public class SongRepositoryJdbcTemplateImpl implements SongRepository {
 
     //language=SQL
-    private final String SQL_INSERT = "INSERT INTO files (storage_fileName, original_fileName, size," +
+    private final String SQL_INSERT = "INSERT INTO song (storage_fileName, original_fileName, size," +
             "type, url) VALUES (?, ? ,?, ?, ?);";
 
     //language=SQl
-    private final String SQL_SELECT_BY_NAME = "SELECT * FROM files WHERE storage_fileName = ?;";
+    private final String SQL_SELECT_BY_NAME = "SELECT * FROM song WHERE storage_fileName = ?;";
 
     @Autowired
     private JdbcTemplate template;

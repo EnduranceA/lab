@@ -1,6 +1,5 @@
 package ru.itis.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +18,6 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.GenericFilterBean;
-import ru.itis.models.Role;
 
 //включение безопасности
 @EnableWebSecurity
@@ -81,10 +79,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) {
             try {
-
                 http.rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository);
 
-                http.formLogin().loginPage("/signIn");
+                http.formLogin().loginPage("/signIn")
+                        .failureUrl("/signIn?error")
+                        .defaultSuccessUrl("/profile")
+                        .usernameParameter("email");
 
                 http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/signIn")

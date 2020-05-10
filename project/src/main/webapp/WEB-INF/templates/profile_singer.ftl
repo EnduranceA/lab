@@ -40,7 +40,7 @@
                 <dd class="col-sm-9">${user.getFirstName()} ${user.getLastName()}</dd>
             </dl>
             <dl class="row">
-                <dt class="col-sm-2"><@spring.message 'profile.page.email'/>:</dt>
+                <dt class="col-sm-2"><@spring.message 'form.email'/>:</dt>
                 <dd class="col-sm-9">${user.email}</dd>
             </dl>
             <h3><@spring.message 'profile.page.uploaded'/></h3>

@@ -76,15 +76,6 @@ public class PersistenceConfig {
         return transactionManager;
     }
 
-    @Bean
-    public DataSource driverManagerDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getProperty("db.driver"));
-        dataSource.setUrl(environment.getProperty("db.url"));
-        dataSource.setUsername(environment.getProperty("db.user"));
-        dataSource.setPassword(environment.getProperty("db.password"));
-        return dataSource;
-    }
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
