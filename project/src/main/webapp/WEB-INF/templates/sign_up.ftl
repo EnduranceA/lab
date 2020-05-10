@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/signIn.css">
     <title>Sign Up</title>
 </head>
+<style>
+    .error {
+        color: #ff0000;
+    }
+</style>
 <body class="text-center">
 <@spring.bind "signUpDto"/>
 <form action="/signUp" method="post" class="form-signin">
@@ -17,20 +22,20 @@
     <div class="form-group">
         <label for="exampleFirstName"><@spring.message 'form.first.name'/>:</label>
         <@spring.formInput "signUpDto.firstName"/>
-        <@spring.showErrors "<br>"/>
+        <@spring.showErrors "<br>", "error"/>
     </div>
     <div class="form-group">
         <label for="exampleLastName"><@spring.message 'form.last.name'/>:</label>
         <@spring.formInput "signUpDto.lastName"/>
-        <@spring.showErrors "<br>"/>
+        <@spring.showErrors "<br>", "error"/>
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1"><@spring.message 'form.email'/></label>
+        <label for="exampleInputEmail1"><@spring.message 'form.email'/>:</label>
         <@spring.formInput "signUpDto.email"/>
-        <@spring.showErrors "<br>","error"/>
+        <li><@spring.showErrors "<br>","error"/></li>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1"><@spring.message 'form.password'/></label>
+        <label for="exampleInputPassword1"><@spring.message 'form.password'/>:</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
     </div>
     <div class="form-check form-check-inline">
