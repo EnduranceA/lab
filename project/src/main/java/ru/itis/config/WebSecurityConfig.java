@@ -84,10 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 http.rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository);
 
-                http.formLogin().loginPage("/signIn")
-                        .failureUrl("/signIn?error")
-                        .defaultSuccessUrl("/profile")
-                        .usernameParameter("email");
+                http.formLogin().loginPage("/signIn");
 
                 http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/signIn")

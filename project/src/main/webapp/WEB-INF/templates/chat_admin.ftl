@@ -1,4 +1,5 @@
 <!doctype html>
+<#import "spring.ftl" as spring />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,15 +17,15 @@
     <script src="/static/js/chat.js"></script>
 </head>
 <body>
-<h1>SUPPORT</h1>
+<h1><@spring.message 'support.page.welcome'/></h1>
 <div>
     <#if listMessages?size != 0>
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Username</th>
-                <th scope="col">Question</th>
-                <th scope="col">Answer</th>
+                <th scope="col"><@spring.message 'support.page.username'/></th>
+                <th scope="col"><@spring.message 'support.page.question'/></th>
+                <th scope="col"><@spring.message 'support.page.answer'/></th>
             </tr>
             </thead>
             <tbody>

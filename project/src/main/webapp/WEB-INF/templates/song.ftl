@@ -1,4 +1,5 @@
 <!doctype html>
+<#import "spring.ftl" as spring />
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -26,16 +27,16 @@
     </script>
 </head>
 <body>
-<h2>SONGS</h2>
+<h2><@spring.message 'songs'/></h2>
 <#if songs?size != 0>
     <table class="table table-hover table-dark">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Singer/group</th>
-        <th scope="col">Name</th>
-        <th scope="col">Song</th>
-        <th scope="col">Add</th>
+        <th scope="col"><@spring.message 'song.singer.and.group'/></th>
+        <th scope="col"><@spring.message 'song.name'/></th>
+        <th scope="col"><@spring.message 'song'/></th>
+        <th scope="col"><@spring.message 'song.add'/></th>
     </tr>
     </thead>
     <tbody>
@@ -48,7 +49,7 @@
             <td>
                 <di id="buttonchik">
                     <input type="button" name="go-to-list" class="btns bask"
-                           value="В корзину" onclick=addToMyMusic(${song.id})>
+                           value="<@spring.message 'song.add'/>" onclick=addToMyMusic(${song.id})>
                 </di>
             </td>
         </tr>

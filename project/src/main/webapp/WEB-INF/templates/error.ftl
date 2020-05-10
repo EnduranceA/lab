@@ -1,4 +1,5 @@
 <!doctype html>
+<#import "spring.ftl" as spring />
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -10,7 +11,7 @@
     <title>Error</title>
 </head>
 <body>
-<h2>ERROR</h2>
+<h2><@spring.message 'error.page'/></h2>
 ${errMsg}
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

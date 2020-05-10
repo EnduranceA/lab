@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<#import "spring.ftl" as spring />
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,27 +11,44 @@
     <title>Sign Up</title>
 </head>
 <body class="text-center">
+<@spring.bind "signUpDto"/>
 <form action="/signUp" method="post" class="form-signin">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    <h1 class="h3 mb-3 font-weight-normal"><@spring.message 'signUp.page'/></h1>
     <div class="form-group">
-        <label for="exampleFirstName">First name:</label>
-        <input type="text" name="firstName" id="exampleFirstName" class="form-control" >
+        <label for="exampleFirstName"><@spring.message 'form.first.name'/>:</label>
+        <@spring.formInput "signUpDto.firstName"/>
+        <@spring.showErrors "<br>"/>
     </div>
-        <div class="form-group">
-            <label for="exampleLastName">Last name:</label>
-            <input type="text" name="lastName" id="exampleLastName" class="form-control" >
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-        </div>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-        <input type="submit" class="btn btn-primary" value="SIGN UP">
+    <div class="form-group">
+        <label for="exampleLastName"><@spring.message 'form.last.name'/>:</label>
+        <@spring.formInput "signUpDto.lastName"/>
+        <@spring.showErrors "<br>"/>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1"><@spring.message 'form.email'/></label>
+        <@spring.formInput "signUpDto.email"/>
+        <@spring.showErrors "<br>","error"/>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1"><@spring.message 'form.password'/></label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="role" id="exampleRadios1" value="SINGER" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            <@spring.message 'form.role.singer'/>
+        </label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="role" id="exampleRadios2" value="USER">
+        <label class="form-check-label" for="exampleRadios2">
+            <@spring.message 'form.role.listener'/>
+        </label>
+    </div>
+    <div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+        <input type="submit" class="btn btn-primary" value="<@spring.message 'signUp'/>">
+    </div>
 </form>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

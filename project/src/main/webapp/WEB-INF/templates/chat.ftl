@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<#import "spring.ftl" as spring />
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -16,25 +17,25 @@
     <script src="/static/js/chat.js"></script>
 </head>
 <body onload="receiveMessage('${userId}')">
-<h1>SUPPORT</h1>
+<h1><@spring.message 'support.page.welcome'/></h1>
 <div>
-    <h3>Hello! This is a support service. Ask your question, please</h3>
+    <h3><@spring.message 'support.page.description'/></h3>
     <input id="message" class="messageInput" placeholder="Your message">
-    <button onclick="sendMessage('${userId}' ,$('#message').val())" class="btn btn-dark">Send</button>
+    <button onclick="sendMessage('${userId}' ,$('#message').val())" class="btn btn-dark"><@spring.message 'button.send'/></button>
 </div>
 <div>
-    <h4>New questions</h4>
+    <h4><@spring.message 'support.page.new_questions'/></h4>
     <ul id="messages">
 
     </ul>
-    <h4>Previously asked questions</h4>
+    <h4><@spring.message 'support.page.previously_questions'/></h4>
     <#if listMessages?size != 0>
         <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Question</th>
-            <th scope="col">Answer</th>
+            <th scope="col"><@spring.message 'support.page.username'/></th>
+            <th scope="col"><@spring.message 'support.page.question'/></th>
+            <th scope="col"><@spring.message 'support.page.answer'/></th>
         </tr>
         </thead>
         <tbody>

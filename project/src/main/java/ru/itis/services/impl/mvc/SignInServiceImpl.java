@@ -32,6 +32,7 @@ public class SignInServiceImpl implements SignInService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if(user.getState().equals(State.CONFIRMED)) {
+                System.out.println("djknkldm");
                 if (passwordEncoder.matches(signInDto.getPassword(), user.getHashPassword())) {
                     return true;
                 } else throw new AccessDeniedException("Wrong email/password");

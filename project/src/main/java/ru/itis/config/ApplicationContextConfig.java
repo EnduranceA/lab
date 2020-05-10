@@ -34,7 +34,6 @@ public class ApplicationContextConfig {
     @Value("${spring.mail.password}")
     private String password;
 
-
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();

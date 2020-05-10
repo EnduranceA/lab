@@ -1,4 +1,5 @@
 <!doctype html>
+<#import "spring.ftl" as spring />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,6 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Confirmed!</h1>
+<h1><@spring.message 'confirm.page'/></h1>
 </body>
 </html>

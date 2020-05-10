@@ -96,11 +96,19 @@
              <version>5.2.2.RELEASE</version>
          </dependency>
 
+         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+         <dependency>
+             <groupId>org.apache.commons</groupId>
+             <artifactId>commons-email</artifactId>
+             <version>1.4</version>
+         </dependency>
+
         <dependency>
-            <groupId>commons-io</groupId>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>1.3.2</version>
         </dependency>
+
 
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -121,7 +129,6 @@
             <version>5.2.4.RELEASE</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -133,7 +140,7 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4</version>
+            <version>1.4.7</version>
         </dependency>
 
         <dependency>
@@ -189,11 +196,19 @@
             <version>2.2.6.RELEASE</version>
         </dependency>
 
+         <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc -->
          <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-jdbc</artifactId>
+             <groupId>org.springframework.session</groupId>
+             <artifactId>spring-session-jdbc</artifactId>
+             <version>2.2.0.RELEASE</version>
          </dependency>
 
+         <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+         <dependency>
+             <groupId>javax.validation</groupId>
+             <artifactId>validation-api</artifactId>
+             <version>2.0.1.Final</version>
+         </dependency>
 
         <!-- https://mvnrepository.com/artifact/jstl/jstl -->
         <dependency>

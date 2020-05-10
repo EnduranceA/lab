@@ -15,7 +15,6 @@ public class SignInController {
 
     @GetMapping("/signIn")
     @PreAuthorize("permitAll()")
-
     public String getSignInPage() {
         return "sign_in";
     }
