@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import ru.itis.models.Song;
+import ru.itis.models.User;
 import ru.itis.repositories.SongRepository;
 
 import java.sql.PreparedStatement;
@@ -78,5 +79,10 @@ public class SongRepositoryJdbcTemplateImpl implements SongRepository {
         catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public List<Song> findByUserId(User user) {
+        return null;
     }
 }

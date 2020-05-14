@@ -52,5 +52,10 @@ public class SongServiceImpl implements SongService {
         }
     }
 
+    @Override
+    public List<Song> getSongsOf(User user) {
+        return songRepository.findByUserId(user);
+    }
+
 
 }

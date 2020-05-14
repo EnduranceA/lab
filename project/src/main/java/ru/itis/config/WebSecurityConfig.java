@@ -2,6 +2,7 @@ package ru.itis.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,6 +24,7 @@ import org.springframework.web.filter.GenericFilterBean;
 @EnableWebSecurity
 //включение проверки безопасности через аннотации
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@ComponentScan(basePackages = "ru.itis")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Configuration

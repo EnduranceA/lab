@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.models.Song;
@@ -43,10 +44,9 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public ModelAndView getSongPage() {
-        ModelAndView modelAndView = new ModelAndView("song");
-        modelAndView.addObject("songs", songService.getSongs());
-        return modelAndView;
+    public String getSongPage(Model model) {
+        model.addAttribute("songs", songService.getSongs());
+        return "song";
     }
 
     @PostMapping("/song")

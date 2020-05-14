@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itis.models.Song;
+import ru.itis.models.User;
 import ru.itis.repositories.SongRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,8 @@ public class SongRepositoryJpaImpl implements SongRepository {
     //language=HQL
     private final static String HQL_FIND_BY_NAME = "SELECT f FROM Song f WHERE f.storageFileName = ?1";
 
+    //language=HQL
+    private final static String HQL_FIND_BY_USER = "FROM Song s WHERE s.author = ?1";
     @PersistenceContext
     private EntityManager entityManagerFactory;
 
@@ -47,5 +50,11 @@ public class SongRepositoryJpaImpl implements SongRepository {
     public Optional<Song> findByName(String name) {
         return entityManagerFactory.createQuery(HQL_FIND_BY_NAME)
                 .setParameter(1, name).getResultList().stream().findFirst();
+    }
+
+    @Override
+    public List<Song> findByUserId(User user) {
+        return entityManagerFactory.createQuery(HQL_FIND_BY_USER)
+                .setParameter(1,user).getResultList();
     }
 }

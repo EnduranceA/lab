@@ -10,4 +10,5 @@ public interface SongService {
     Song get(String fileName);
     List<Song> getSongs();
     void addSong(Long songId, List<Song> songs);
+    List<Song> getSongsOf(User user);
 }

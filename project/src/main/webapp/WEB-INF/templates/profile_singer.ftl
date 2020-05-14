@@ -9,11 +9,11 @@
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<@spring.url '/css/style.css'/>">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
-    <script src="/static/js/music.js"></script>
+    <script src="<@spring.url '/js/music.js'/>"></script>
     <title>Profile</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="card">
-                <img src="/images/music1.jpg" class="card-img-top" alt="...">
+                <img src="<@spring.url '/images/music1.jpg'/>" class="card-img-top" alt="...">
             </div>
             <div class="container-xl btn-group-vertical">
                 <a href="/music" class="btn btn-primary"><@spring.message 'navbar.main'/></a>
