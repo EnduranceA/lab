@@ -2,15 +2,20 @@ package ru.itis.config;
 
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import javax.servlet.FilterRegistration;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
 public class AppInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
+
+    private String TMP_FOLDER = "/tmp";
+    private int MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -42,6 +47,10 @@ public class AppInitializer extends
 
         servletContext.addListener(new ContextLoaderListener(appContext));
 
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER,
+                MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
+
+        dispatcher.setMultipartConfig(multipartConfigElement);
         // UTF8 Charactor Filter.
         FilterRegistration.Dynamic fr = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         fr.setInitParameter("encoding", "UTF-8");

@@ -43,7 +43,7 @@ public class SongController {
         }
     }
 
-    @GetMapping("/songs")
+    @GetMapping("/music")
     public String getSongPage(Model model) {
         model.addAttribute("songs", songService.getSongs());
         return "song";

@@ -36,4 +36,8 @@ GET http://localhost:8080/api/music
 
 ###
 
+GET http://localhost:8080/api/users/1/files/information
+
+###
+
 

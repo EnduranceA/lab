@@ -10,6 +10,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+
 import java.util.Properties;
 
 @Configuration
@@ -57,6 +60,7 @@ public class ApplicationContextConfig {
         fmConfigFactoryBean.setTemplateLoaderPath("/WEB-INF/templates/");
         return fmConfigFactoryBean;
     }
+
 }
 
 

@@ -1,6 +1,8 @@
 package ru.itis.models;
 
 import lombok.*;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -41,6 +43,7 @@ public class User implements Serializable {
     private String confirmCode;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade=CascadeType.ALL)
+    @Where(clause = "type = 'audio/mpeg'")
     private List<Song> songs = new ArrayList<>();
 
     //отправленные сообщения

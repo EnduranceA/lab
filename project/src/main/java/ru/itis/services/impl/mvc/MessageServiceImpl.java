@@ -9,6 +9,7 @@ import ru.itis.models.Message;
 import ru.itis.models.User;
 import ru.itis.repositories.MessageRepository;
 import ru.itis.repositories.UserRepository;
+import ru.itis.repositories.jpa.UserRepositoryJpa;
 import ru.itis.services.interfaces.MessageService;
 
 import java.lang.reflect.Method;
@@ -22,8 +23,7 @@ public class MessageServiceImpl implements MessageService {
     private MessageRepository messageRepository;
 
     @Autowired
-    @Qualifier("userRepository")
-    private UserRepository userRepository;
+    private UserRepositoryJpa userRepository;
 
     @Override
     public List<Message> findAll() {
@@ -33,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
     @Transactional
     @Override
     public void save(MessageDto messageDto) {
-        Optional<User> user = userRepository.find(messageDto.getUserId());
+        Optional<User> user = userRepository.findById(messageDto.getUserId());
         if (user.isPresent()) {
             Message message = Message.builder()
                     .text(messageDto.getText())

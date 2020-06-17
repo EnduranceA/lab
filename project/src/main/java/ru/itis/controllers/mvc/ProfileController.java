@@ -29,19 +29,15 @@ public class ProfileController {
 
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView getProfilePage() {
+    public String getProfilePage(Model model) {
         UserDetailsImpl userDetails = (UserDetailsImpl)SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         user = userDetails.getUser();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", user);
+        model.addAttribute("user", user);
         if (user.getRole().equals(Role.USER)) {
-            modelAndView.setViewName("profile_user");
+            return "profile_user";
         }
-        else {
-            modelAndView.setViewName("profile_singer");
-        }
-        return modelAndView;
+        return "profile_singer";
     }
 
     @PostMapping("/profile/file")

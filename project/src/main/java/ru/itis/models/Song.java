@@ -24,6 +24,9 @@ public class Song {
     @Column(name = "storage_filename")
     private String storageFileName;
 
+    @Transient
+    private String fileName;
+
     @Column(name = "original_filename")
     private String originalFileName;
 
@@ -42,4 +45,9 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
+
+    @PostLoad
+    public void loadSong() {
+        fileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+    }
 }

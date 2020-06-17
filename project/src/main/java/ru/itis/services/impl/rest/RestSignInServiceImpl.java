@@ -12,6 +12,7 @@ import ru.itis.helpers.JwtHelper;
 import ru.itis.models.State;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
+import ru.itis.repositories.jpa.UserRepositoryJpa;
 import ru.itis.services.interfaces.RestSignInService;
 import java.util.Optional;
 
@@ -22,8 +23,7 @@ public class RestSignInServiceImpl implements RestSignInService {
     private JwtHelper jwtHelper;
 
     @Autowired
-    @Qualifier("userRepository")
-    private UserRepository userRepository;
+    private UserRepositoryJpa userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,9 +31,8 @@ public class RestSignInServiceImpl implements RestSignInService {
     @Override
     @Transactional
     public TokenDto signIn(SignInDto signInDto) {
-        Optional<User> userOptional = userRepository.findByEmail(signInDto.getEmail());
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
+        User user = userRepository.findByEmail(signInDto.getEmail());
+        if (user != null) {
             if(user.getState().equals(State.CONFIRMED)) {
                 if (passwordEncoder.matches(signInDto.getPassword(), user.getHashPassword())) {
                     String token = jwtHelper.createToken(user);

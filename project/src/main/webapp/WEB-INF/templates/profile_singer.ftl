@@ -13,7 +13,36 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
-    <script src="<@spring.url '/js/music.js'/>"></script>
+    <script>
+        function sendFile() {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            // данные для отправки
+            let formData = new FormData();
+            // забрал файл из input
+            let files = ($('#file'))[0]['files'];
+            // добавляю файл в formData
+            [].forEach.call(files, function (file) {
+                formData.append("file", file);
+            });
+
+            $.ajax({
+                type: "POST",
+                beforeSend: function(request) {
+                    request.setRequestHeader(header, token);},
+                url: "/profile/file",
+                data: formData,
+                processData: false,
+                contentType: false
+            })
+                .done(function (html) {
+                    $("#content").html(html);
+                })
+                .fail(function () {
+                    alert('Error')
+                });
+        }
+    </script>
     <title>Profile</title>
 </head>
 <body>

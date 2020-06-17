@@ -1,7 +1,6 @@
 package ru.itis.services.impl.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +8,7 @@ import ru.itis.dto.SignUpDto;
 import ru.itis.models.Role;
 import ru.itis.models.State;
 import ru.itis.models.User;
-import ru.itis.repositories.UserRepository;
+import ru.itis.repositories.jpa.UserRepositoryJpa;
 import ru.itis.services.interfaces.EmailService;
 import ru.itis.services.interfaces.SignUpService;
 import java.time.LocalDateTime;
@@ -19,8 +18,7 @@ import java.util.UUID;
 public class SignUpServiceImpl implements SignUpService {
 
     @Autowired
-    @Qualifier("userRepository")
-    private UserRepository userRepository;
+    private UserRepositoryJpa userRepository;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -31,7 +29,8 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     @Transactional
     public boolean signUp(SignUpDto signUpDto) {
-        if (!userRepository.findByEmail(signUpDto.getEmail()).isPresent()){
+        User users = userRepository.findByEmail(signUpDto.getEmail());
+        if (users == null){
             User user = User.builder()
                     .email(signUpDto.getEmail())
                     .firstName(signUpDto.getFirstName())
