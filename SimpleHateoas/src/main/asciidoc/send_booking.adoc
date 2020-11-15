@@ -1,0 +1,25 @@
+= Описание API по курсам
+
+== Методы
+
+|===
+|Метод | Назначение
+|`PUT`
+|Обновить сущность или ее состояние
+|===
+
+=== Отправка заказа
+
+Можно отправлять заказы со статусом *REGISTERED*
+
+.request
+
+include::{snippets}\sent_booking\http-request.adoc[]
+
+.response
+
+include::{snippets}\sent_booking\http-response.adoc[]
+
+.response-fields
+
+include::{snippets}\sent_booking\response-fields.adoc[]

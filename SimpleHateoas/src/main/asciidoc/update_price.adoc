@@ -1,0 +1,25 @@
+= Описание API по курсам
+
+== Методы
+
+|===
+|Метод | Назначение
+|`PUT`
+|Обновить сущность или ее состояние
+|===
+
+=== Обновление цены товара
+
+Можно изменять цену товара
+
+.request
+
+include::{snippets}\update_price\http-request.adoc[]
+
+.response
+
+include::{snippets}\update_price\http-response.adoc[]
+
+.response-fields
+
+include::{snippets}\update_price\response-fields.adoc[]
