@@ -1,0 +1,84 @@
+POST http://localhost:8080/api/lab/deduction
+Content-Type: application/json
+
+{
+  "userDto": {
+    "firstName": "Aнгелина",
+    "lastName": "Еланская",
+    "patronymic": "Андреевнa",
+    "phoneNumber": "89375776004",
+    "groupNumber": "11-801"
+  },
+  "labName": "JavaLab"
+}
+
+###
+POST http://localhost:8080/api/lab/enrollment
+Content-Type: application/json
+
+{
+  "userDto": {
+    "firstName": "Aнгелина",
+    "lastName": "Еланская",
+    "patronymic": "Андреевнa",
+    "phoneNumber": "89375776004",
+    "groupNumber": "11-801"
+  },
+  "labName": "JavaLab"
+}
+
+###
+POST http://localhos{
+  "userDto": {
+    "firstName": "Aнгелина",
+    "lastName": "Еланская",
+    "patronymic": "Андреевнa",
+    "phoneNumber": "89375776004",
+    "groupNumber": "11-801"
+  },
+  "instituteName": "Высшая школа ИТИС",
+  "courseNumber": 3,
+  "passportSeries": 9214,
+  "passportNumber": 565758,
+  "dateOfBirth": "26.03.2000"
+}t:8080/api/social
+Content-Type: application/json
+
+
+###
+POST http://localhost:8080/api/grant/all
+Content-Type: application/json
+
+{
+  "userDto": {
+    "firstName": "Aнгелины",
+    "lastName": "Еланской",
+    "patronymic": "Андреевны",
+    "phoneNumber": "89375776004",
+    "groupNumber": "11-801"
+  },
+  "courseNumber": 3,
+  "passportSeries": 9214,
+  "passportNumber": 565758,
+  "email": "elanskaya.lina@gmail.com"
+}
+
+###
+POST http://localhost:8080/api/grant/first
+Content-Type: application/json
+
+{
+  "userDto": {
+    "firstName": "Aнгелины",
+    "lastName": "Еланской",
+    "patronymic": "Андреевны",
+    "phoneNumber": "89375776004",
+    "groupNumber": "11-801"
+  },
+  "courseNumber": 1,
+  "passportSeries": 9214,
+  "passportNumber": 565758,
+  "email": "elanskaya.lina@gmail.com"
+}
+
+###
