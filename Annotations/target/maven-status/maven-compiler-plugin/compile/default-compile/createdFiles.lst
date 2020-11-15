@@ -1,0 +1,9 @@
+ru\itis\html\generator\models\forms\Form.class
+ru\itis\html\generator\config\FreemarkerConfiguration.class
+ru\itis\html\generator\HtmlProcessor.class
+ru\itis\html\generator\annotations\HtmlInput.class
+ru\itis\html\generator\models\forms\Input$InputBuilder.class
+ru\itis\html\generator\annotations\HtmlForm.class
+ru\itis\html\generator\models\forms\Input.class
+ru\itis\html\generator\models\forms\Form$FormBuilder.class
+ru\itis\html\generator\models\User.class
