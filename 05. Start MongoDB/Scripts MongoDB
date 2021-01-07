@@ -1,0 +1,192 @@
+//создание базы данных
+use online_store
+
+//добавление документов "магазин" в коллекцию
+db.shops.insert({
+    title: "Парк Хаус"
+});
+db.shops.insert({
+    title: "Мега"
+});
+
+//добавление документов "продавец" в коллекцию
+db.sellers.insert(
+    {
+        name: "ZARA",
+        email: "lalala@gmail.com",
+        hash_password: "uchd435nknlkn34k2n5"
+    });
+db.sellers.update({_id: ObjectId("5fb6ba4ca3a5b1057612068e")}, {
+    $set: {
+        shop_id: ObjectId("5fb6c091a3a5b105761206a4")
+    }
+});
+db.sellers.insert(
+    {
+        name: "АШАН",
+        email: "seller_help@gmail.com",
+        hash_password: "uciejd4krgdp35lwd2n5"
+    });
+db.sellers.update({_id: ObjectId("5fb6bfdda3a5b105761206a1")}, {
+    $set: {
+        shop_id: ObjectId("5fb6c1c0a3a5b105761206a7")
+    }
+});
+db.sellers.insert(
+    {
+        name: "АШАН",
+        email: "seller_help@gmail.com",
+        hash_password: "uciejd4krgdp35lwd2n5",
+        shop_id: "5fb6c1c0a3a5b105761206a7"
+    });
+
+//добавление документов "покупатель" в коллекцию
+db.customers.insert(
+    {
+        first_name: "Ангелина",
+        last_name: "Еланская",
+        sex: "женский",
+        phone_number: 89375776004,
+    });
+db.customers.insert(
+    {
+        first_name: "Даниил",
+        last_name: "Вдовинов",
+        sex: "мужской",
+        email: "daniil@gmail.com",
+        hash_password: "jeglvdjopdjgeop3",
+        phone_number: 89375803535,
+    });
+db.customers.insert(
+    {
+        first_name: "Диана",
+        last_name: "Федотова",
+        sex: "женский",
+        phone_number: 89375776004,
+        email: "diana00@gmail.com",
+        hash_password: "edvj4kt5n54l98",
+    });
+
+//добавление документов "товар" в коллекцию
+db.products.insert(
+    {
+        title: "product#1",
+        price: 100,
+        count: 20,
+        seller_id: "5fb6ba4ca3a5b1057612068e"
+    });
+db.products.insert(
+    {
+        title: "product#2",
+        price: 250,
+        count: 60,
+        seller_id: "5fb6ba4ca3a5b1057612068e"
+    });
+db.products.insert(
+    {
+        title: "product#3",
+        price: 230,
+        count: 50,
+        seller_id: "5fb6ba4ca3a5b1057612068e"
+    });
+db.products.insert(
+    {
+        title: "product#4",
+        price: 10,
+        count: 20,
+        seller_id: "5fb6ba4ca3a5b1057612068e"
+    });
+db.products.insert(
+    {
+        title: "product#5",
+        price: 1000,
+        count: 3,
+        seller_id: "5fb6c2c2a3a5b105761206aa"
+    });
+
+//добавление документов "заказ" в коллекцию
+db.bookings.insert(
+    {
+        customer_id: "5fb6bc52a3a5b1057612069c",
+        sum: 350,
+        state: "REGISTERED",
+        products: {
+            product1: ObjectId("5fb6bc1aa3a5b1057612069a"),
+            product2: ObjectId("5fb6bfa8a3a5b105761206a0"),
+            product3: ObjectId("5fb6c36ea3a5b105761206ac")
+        },
+    });
+db.bookings.insert(
+    {
+        customer_id: "5fb6bc52a3a5b1057612069c",
+        sum: 200,
+        state: "SENT",
+        products: {
+            product1: ObjectId("5fb6bc1aa3a5b1057612069a"),
+        },
+    });
+db.bookings.insert(
+    {
+        customer_id: "5fb6c28ea3a5b105761206a8",
+        sum: 350,
+        state: "SENT",
+        products: {
+            product1: ObjectId("5fb6c389a3a5b105761206ae"),
+            product2: ObjectId("5fb6c36ea3a5b105761206ac")
+        },
+    });
+db.bookings.insert(
+    {
+        customer_id: "5fb6c292a3a5b105761206a9",
+        sum: 350,
+        state: "RECEIVED",
+        products: {
+            product1: ObjectId("5fb6c36ea3a5b105761206ac"),
+            product2: ObjectId("5fb6bfa8a3a5b105761206a0"),
+            product3: ObjectId("5fb6c36ea3a5b105761206ac")
+        },
+    });
+
+//поиск покупателей по номеру телефона 
+db.customers.find({
+    phone_number: 89375776004
+});
+
+//по количеству проверяем, какие товары есть в наличии
+//выводим их в порядке убывания цены
+db.products.find({
+    count: {$exists: true}
+}).sort({price: -1});
+
+//поиск магазина по его названию 
+db.shops.find({
+    title: "Парк Хаус"
+});
+
+//получаем все товары конкретного продавца и сортируем их по
+//(сначала) количеству и (затем) цене
+db.products.find({
+    seller_id: "5fb6ba4ca3a5b1057612068e"
+}).sort({price: 1, count: -1});
+
+
+//получаем все заказы, которые имею текущий статус "REGISTERED", или
+//общая сумма заказа составляет менее 300
+db.bookings.find({
+    $or:[{state: "REGISTERED"}, {sum: {$lt: 300}}]
+});
+
+//добавление нового дополнительного сведения для конкретного заказа
+db.bookings.update(
+    {
+        customer_id: "5fb6c292a3a5b105761206a9",
+        sum: 350,
+        state: "RECEIVED"
+    },
+    { $push: {comment : "Важный заказ"}
+});
+
+//изменение количества заказа, а именно увеличение на 100
+db.products.update({title: "product#1"}, {$inc: {count: 100}});
+
+
